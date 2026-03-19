@@ -171,3 +171,49 @@ export function renderBetControls(containerId, onBetChangeCallback) {
 
     return html;
 }
+
+export async function pollWins() {
+    try {
+        const res = await fetch(`${API_URL}/wins`, {
+            headers: {
+                'Authorization': `tma ${gameState.initData}`,
+                'bypass-tunnel-reminder': 'true'
+            }
+        });
+        if (res.ok) {
+            const data = await res.json();
+            renderWins(data.wins);
+        }
+    } catch (e) { }
+}
+
+let lastWins = [];
+function renderWins(wins) {
+    if (!wins || wins.length === 0) return;
+    const ticker = document.getElementById('wins-ticker');
+    if (!ticker) return;
+
+    if (JSON.stringify(wins) === JSON.stringify(lastWins)) return;
+    lastWins = wins;
+
+    ticker.innerHTML = wins.map(w => `
+        <div class="flex justify-between items-center bg-black/40 rounded p-1 px-2 border border-cyberPanel animate-[fadeIn_0.5s_ease]">
+            <div class="flex items-center gap-2 w-1/2 overflow-hidden">
+                <span class="text-white font-bold text-xs truncate max-w-[70px]">${w.username}</span>
+                <span class="text-tgText/50 uppercase text-[9px] font-mono hidden sm:inline">${w.game}</span>
+            </div>
+            <div class="flex items-center justify-end gap-2 w-1/2">
+                <span class="text-cyberSuccess font-black text-xs">X${w.multiplier.toFixed(2)}</span>
+                <span class="text-cyberAccent text-xs font-mono">+${w.win}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+setTimeout(() => {
+    if (!gameState.currentGame) pollWins();
+}, 500);
+
+setInterval(() => {
+    if (!gameState.currentGame) pollWins();
+}, 5000);

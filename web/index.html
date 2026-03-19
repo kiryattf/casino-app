@@ -53,7 +53,19 @@
 
         <!-- HUB MENU -->
         <div id="hub-menu" class="hidden flex flex-col items-center gap-6 w-full max-w-sm mx-auto mt-4 pb-10">
-            <div class="w-full text-center mb-2">
+
+            <!-- Recent Wins Ticker -->
+            <div
+                class="w-full bg-cyberPanel border border-cyberAccent/30 rounded-xl shadow-lg mb-2 relative overflow-hidden h-[120px]">
+                <div class="text-[10px] text-tgText/50 font-mono absolute top-2 left-3 tracking-widest"><i
+                        class="fa-solid fa-satellite-dish text-cyberEmerald animate-pulse"></i> LIVE ДОБЫЧА</div>
+                <div id="wins-ticker"
+                    class="absolute top-8 left-3 right-3 flex flex-col gap-2 transition-transform duration-500 ease-in-out">
+                    <div class="text-xs text-tgText/40 text-center py-2 animate-pulse">Сбор данных со спутника...</div>
+                </div>
+            </div>
+
+            <div class="w-full text-center mb-0 mt-2">
                 <h2 class="text-xl font-bold text-tgText/80 tracking-widest uppercase">Выберите игру</h2>
             </div>
 
