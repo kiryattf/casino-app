@@ -1,0 +1,50 @@
+body {
+    background: radial-gradient(circle at top, #0a1526 0%, #050b14 100%);
+}
+
+#game-container {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.base-panel {
+    background: rgba(10, 21, 38, 0.85);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 25px rgba(0, 255, 170, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    padding: 24px;
+}
+
+.cyber-btn {
+    background: linear-gradient(90deg, #00ffaa, #00f0ff);
+    color: #050b14;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 255, 170, 0.4);
+    transition: transform 0.1s, box-shadow 0.2s, opacity 0.2s;
+    border: none;
+}
+
+.cyber-btn:active:not(:disabled) {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 255, 170, 0.4);
+}
+
+.cyber-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    box-shadow: none;
+}

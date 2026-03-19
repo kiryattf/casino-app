@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LUMABET CASINO</title>
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyberBase: '#050b14',
+                        cyberPanel: '#0a1526',
+                        cyberAccent: '#00f0ff',
+                        cyberEmerald: '#00ffaa',
+                        cyberDanger: '#ff4444',
+                        cyberSuccess: '#00ffaa',
+                        tgText: 'var(--tg-theme-text-color, #f8fafc)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body
+    class="bg-cyberBase text-tgText p-4 font-sans select-none overflow-hidden h-screen flex flex-col justify-center items-center">
+
+    <div id="loading" class="flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-2 text-cyberAccent animate-pulse">ИНИЦИАЛИЗАЦИЯ...</h1>
+    </div>
+
+    <!-- The container where specific games will be dynamically injected -->
+    <div id="game-container" class="w-full max-w-sm w-full mx-auto hidden">
+        <!-- Game specific content loads here -->
+    </div>
+
+    <!-- Main Entry Module -->
+    <script src="assets/js/app.js" type="module"></script>
+</body>
+
+</html>
