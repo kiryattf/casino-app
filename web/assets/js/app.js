@@ -19,13 +19,19 @@ const dom = {
 
 export const API_URL = window.API_BASE;
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootstrap() {
     initApp();
 
     tg.BackButton.onClick(() => {
         if (gameState.currentGame) showHub();
     });
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap);
+} else {
+    bootstrap();
+}
 
 async function initApp() {
     await fetchBalance();
