@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LUMABET CASINO</title>
-    <!-- Telegram WebApp SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,23 +25,83 @@
             }
         }
     </script>
-    <!-- Main Style -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body
-    class="bg-cyberBase text-tgText p-4 font-sans select-none overflow-hidden h-screen flex flex-col justify-center items-center">
+<body class="bg-cyberBase text-tgText font-sans select-none overflow-x-hidden w-full h-screen flex flex-col">
 
-    <div id="loading" class="flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-2 text-cyberAccent animate-pulse">ИНИЦИАЛИЗАЦИЯ...</h1>
+    <!-- Topbar (Hub) -->
+    <div id="topbar"
+        class="w-full flex justify-between items-center p-4 bg-cyberPanel border-b border-cyberAccent/30 shadow-md z-50">
+        <div class="flex items-center gap-2">
+            <span
+                class="text-xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-cyberEmerald to-cyberAccent">LUMABET</span>
+        </div>
+        <div class="bg-black/60 px-4 py-1.5 rounded-full border border-cyberEmerald/50 shadow-[0_0_10px_rgba(0,255,170,0.2)] flex items-center gap-2 cursor-pointer transition-transform active:scale-95"
+            id="balance-container">
+            <span id="live-balance" class="font-bold font-mono text-white text-lg animate-pulse">---</span>
+            <span class="text-cyberEmerald">💎</span>
+        </div>
     </div>
 
-    <!-- The container where specific games will be dynamically injected -->
-    <div id="game-container" class="w-full max-w-sm w-full mx-auto hidden">
-        <!-- Game specific content loads here -->
+    <!-- Main Content Area -->
+    <div id="main-content" class="flex-1 w-full overflow-y-auto p-4 relative">
+        <div id="loading" class="absolute inset-0 flex flex-col items-center justify-center bg-cyberBase z-40">
+            <h1 class="text-3xl font-bold mb-2 text-cyberAccent animate-pulse">СИНХРОНИЗАЦИЯ...</h1>
+        </div>
+
+        <!-- HUB MENU -->
+        <div id="hub-menu" class="hidden flex flex-col items-center gap-6 w-full max-w-sm mx-auto mt-4 pb-10">
+            <div class="w-full text-center mb-2">
+                <h2 class="text-xl font-bold text-tgText/80 tracking-widest uppercase">Выберите игру</h2>
+            </div>
+
+            <div class="w-full base-panel flex flex-col gap-4 p-4 shadow-lg cursor-pointer transform transition hover:scale-[1.02] active:scale-95 border-cyberAccent/50"
+                onclick="window.navGame('crash')">
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl text-cyberAccent"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="flex-1 text-left">
+                        <h3 class="text-2xl font-black text-white uppercase tracking-wider">CRASH</h3>
+                        <p class="text-sm text-tgText/60 font-mono">Графики & Риск</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full base-panel flex flex-col gap-4 p-4 shadow-lg cursor-pointer transform transition hover:scale-[1.02] active:scale-95 border-cyberEmerald/50"
+                onclick="window.navGame('mines')">
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl text-cyberEmerald"><i class="fa-solid fa-bomb"></i></div>
+                    <div class="flex-1 text-left">
+                        <h3 class="text-2xl font-black text-white uppercase tracking-wider">MINES</h3>
+                        <p class="text-sm text-tgText/60 font-mono">Саперы & Гемы</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full base-panel flex flex-col gap-4 p-4 shadow-lg cursor-pointer transform transition hover:scale-[1.02] active:scale-95 border-yellow-500/50"
+                onclick="window.navGame('plinko')">
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl text-yellow-400"><i class="fa-solid fa-bowling-ball"></i></div>
+                    <div class="flex-1 text-left">
+                        <h3 class="text-2xl font-black text-white uppercase tracking-wider">PLINKO</h3>
+                        <p class="text-sm text-tgText/60 font-mono">Шарики & Лузы</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Dynamic Game Container -->
+        <div id="game-container" class="hidden w-full max-w-sm mx-auto pb-8"></div>
     </div>
 
-    <!-- Main Entry Module -->
+    <!-- API Config (Should be adjusted during deploy) -->
+    <script>
+        window.API_BASE = "http://localhost:8080/api";
+        // Example for live:
+        // window.API_BASE = "https://your-ngrok.app/api";
+    </script>
     <script src="assets/js/app.js" type="module"></script>
 </body>
 
