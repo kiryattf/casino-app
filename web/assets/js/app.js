@@ -1,6 +1,5 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
-tg.enableClosingConfirmation();
 
 export const gameState = {
     balance: 0,
